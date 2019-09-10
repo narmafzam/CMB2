@@ -88,13 +88,21 @@ abstract class CMB2_Type_Multi_Base extends CMB2_Type_Base {
 			$options[''] = $option_none;
 		}
 		$options = $options + (array) $field->options();
-		foreach ( $options as $opt_value => $opt_label ) {
+		foreach ( $options as $opt_value => $opt ) {
 
 			// Clone args & modify for just this item
 			$a = $args;
 
 			$a['value'] = $opt_value;
-			$a['label'] = $opt_label;
+			if (is_array($opt)) {
+
+				foreach ($opt as $attr => $attr_value) {
+					$a[$attr] = $attr_value;
+				}
+			} else {
+
+				$a['label'] = $opt;
+			}
 
 			// Check if this option is the value of the input
 			if ( $value === CMB2_Utils::normalize_if_numeric( $opt_value ) ) {
