@@ -667,7 +667,7 @@ window.CMB2 = window.CMB2 || {};
 			cmb.idNumber++;
 		}
 
-		cmb.newRowHousekeeping( $row.data( 'title', $this.data( 'grouptitle' ) ) ).cleanRow( $row, prevNum, true );
+		cmb.newRowHousekeeping( $row.data( 'title', $this.data( 'grouptitle' ) ) ).cleanRow( $row, 0, true );
 		$row.find( '.cmb-add-row-button' ).prop( 'disabled', false );
 
 		var $newRow = $( '<' + nodeName + ' id="'+ getRowId( $oldRow.attr('id') ) +'" class="postbox cmb-row cmb-repeatable-grouping" data-iterator="'+ cmb.idNumber +'">'+ $row.html() +'</' + nodeName + '>' );
@@ -685,11 +685,9 @@ window.CMB2 = window.CMB2 || {};
 		var $this         = $( this );
 		var $table        = $id( $this.data('selector') );
 		var $emptyrow     = $table.find('.empty-row');
-		var prevNum       = parseInt( $emptyrow.find('[data-iterator]').data('iterator'), 10 );
-		cmb.idNumber      = parseInt( prevNum, 10 ) + 1;
 		var $row          = $emptyrow.clone();
 
-		cmb.newRowHousekeeping( $row ).cleanRow( $row, prevNum );
+		cmb.newRowHousekeeping( $row ).cleanRow( $row, 0 );
 
 		$emptyrow.removeClass('empty-row hidden').addClass('cmb-repeat-row');
 		$emptyrow.after( $row );
