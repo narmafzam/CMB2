@@ -598,12 +598,19 @@ class CMB2 extends CMB2_Base
 	{
 		ob_start();
 		$field_group->peform_param_callback( 'before_group_row' );
+		$attributes       = $field_group->options( 'attributes' );
 		$closed_class     = $field_group->options( 'closed' ) ? ' closed' : '';
 		$confirm_deletion = $field_group->options( 'remove_confirm' );
 		$confirm_deletion = ! empty( $confirm_deletion ) ? $confirm_deletion : '';
 
-		echo '
-		<div id="cmb-group-', $field_group->id(), '-', $field_group->index, '" class="postbox cmb-row cmb-repeatable-grouping', $closed_class, '" data-iterator="', $field_group->index, '">';
+		$custom_class                = "postbox cmb-row cmb-repeatable-grouping{$closed_class}";
+		$attributes['id']            = "cmb-group-{$field_group->id()}-{$field_group->index}";
+		$attributes['class']         = isset($attributes['class']) ? $attributes['class'] . ' ' . $custom_class : $custom_class;
+		$attributes['data-iterator'] = $field_group->index;
+
+		$attributes = urldecode_deep(str_replace("=", '="', http_build_query($attributes, null, '" ', PHP_QUERY_RFC3986)).'"');
+
+		echo "<div {$attributes}>";
 
 		if ( $field_group->args( 'repeatable' )) {
 			echo '<button type="button" data-selector="', $field_group->id(), '_repeat" data-confirm="', esc_attr( $confirm_deletion ), '" class="dashicons-before dashicons-no-alt cmb-remove-group-row" title="', esc_attr( $field_group->options( 'remove_button' ) ), '"></button>';

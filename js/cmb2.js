@@ -48,7 +48,7 @@ window.CMB2 = window.CMB2 || {};
 		var $metabox     = cmb.metabox();
 		var $repeatGroup = $metabox.find('.cmb-repeatable-group');
 
-		 // Init time/date/color pickers
+		// Init time/date/color pickers
 		cmb.initPickers( $metabox.find('input[type="text"].cmb2-timepicker'), $metabox.find('input[type="text"].cmb2-datepicker'), $metabox.find('input[type="text"].cmb2-colorpicker') );
 
 		// Init code editors.
@@ -88,9 +88,9 @@ window.CMB2 = window.CMB2 || {};
 				.on( 'cmb2_add_row', cmb.emptyValue )
 				.on( 'cmb2_add_row', cmb.setDefaults )
 				.filter('.sortable').each( function() {
-					// Add sorting arrows
-					$( this ).find( '.cmb-remove-group-row-button' ).before( '<a class="button-secondary cmb-shift-rows move-up alignleft" href="#"><span class="'+ l10n.up_arrow_class +'"></span></a> <a class="button-secondary cmb-shift-rows move-down alignleft" href="#"><span class="'+ l10n.down_arrow_class +'"></span></a>' );
-				})
+				// Add sorting arrows
+				$( this ).find( '.cmb-remove-group-row-button' ).before( '<a class="button-secondary cmb-shift-rows move-up alignleft" href="#"><span class="'+ l10n.up_arrow_class +'"></span></a> <a class="button-secondary cmb-shift-rows move-down alignleft" href="#"><span class="'+ l10n.down_arrow_class +'"></span></a>' );
+			})
 				.on( 'click', '.cmb-shift-rows', cmb.shiftRows );
 		}
 
@@ -651,10 +651,9 @@ window.CMB2 = window.CMB2 || {};
 
 		var $table   = $id( $this.data('selector') );
 		var $oldRow  = $table.find('.cmb-repeatable-grouping').last();
-		var $row     = $($this.data('fields'));
-		var prevNum  = parseInt( $row.data('iterator'), 10 );
+		var $newRow  = $($this.data('fields'));
+		var prevNum  = parseInt( $newRow.data('iterator'), 10 );
 		cmb.idNumber = parseInt( prevNum, 10 ) + 1;
-		var nodeName = $row.prop('nodeName') || 'div';
 		var getRowId = function( id ) {
 			id = id.split('-');
 			id.splice(id.length - 1, 1);
@@ -667,10 +666,12 @@ window.CMB2 = window.CMB2 || {};
 			cmb.idNumber++;
 		}
 
-		cmb.newRowHousekeeping( $row.data( 'title', $this.data( 'grouptitle' ) ) ).cleanRow( $row, prevNum, true );
-		$row.find( '.cmb-add-row-button' ).prop( 'disabled', false );
+		cmb.newRowHousekeeping( $newRow.data( 'title', $this.data( 'grouptitle' ) ) ).cleanRow( $newRow, prevNum, true );
+		$newRow.find( '.cmb-add-row-button' ).prop( 'disabled', false );
 
-		var $newRow = $( '<' + nodeName + ' id="'+ getRowId( $oldRow.attr('id') ) +'" class="postbox cmb-row cmb-repeatable-grouping" data-iterator="'+ cmb.idNumber +'">'+ $row.html() +'</' + nodeName + '>' );
+		$newRow.attr('id', getRowId( $oldRow.attr('id') ));
+		$newRow.data('data-iterator',  cmb.idNumber);
+
 		$oldRow.after( $newRow );
 
 		cmb.afterRowInsert( $newRow );
@@ -971,12 +972,12 @@ window.CMB2 = window.CMB2 || {};
 				$( this ).after( '<div id="picker-' + i + '" style="z-index: 1000; background: #EEE; border: 1px solid #CCC; position: absolute; display: block;"></div>' );
 				$id( 'picker-' + i ).hide().farbtastic( $( this ) );
 			} )
-			.focus( function() {
-				$( this ).next().show();
-			} )
-			.blur( function() {
-				$( this ).next().hide();
-			} );
+				.focus( function() {
+					$( this ).next().show();
+				} )
+				.blur( function() {
+					$( this ).next().hide();
+				} );
 		}
 	};
 
