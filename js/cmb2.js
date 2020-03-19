@@ -670,7 +670,7 @@ window.CMB2 = window.CMB2 || {};
 		$newRow.find( '.cmb-add-row-button' ).prop( 'disabled', false );
 
 		$newRow.attr('id', getRowId( $oldRow.attr('id') ));
-		$newRow.data('data-iterator',  cmb.idNumber);
+		$newRow.attr('data-iterator',  cmb.idNumber);
 
 		$oldRow.after( $newRow );
 
