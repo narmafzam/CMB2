@@ -97,7 +97,7 @@ class CMB2_Type_File_Base extends CMB2_Type_Text {
         <script type="text/html" id="tmpl-cmb2-single-image">
             <div class="img-status cmb2-media-item">
                 <img width="{{ data.sizeWidth }}" height="{{ data.sizeHeight }}" src="{{ data.sizeUrl }}" class="cmb-file-field-image" alt="{{ data.filename }}" title="{{ data.filename }}" />
-                <a href="#" class="cmb2-remove-file-button" rel="{{ data.mediaField }}">{{ data.stringRemoveImage }}</a>
+                <p><a href="#" class="cmb2-remove-file-button" rel="{{ data.mediaField }}">{{ data.stringRemoveImage }}</a></p>
             </div>
         </script>
         <script type="text/html" id="tmpl-cmb2-single-file">
@@ -108,7 +108,7 @@ class CMB2_Type_File_Base extends CMB2_Type_Text {
         <script type="text/html" id="tmpl-cmb2-list-image">
             <li class="img-status cmb2-media-item">
                 <img width="{{ data.sizeWidth }}" height="{{ data.sizeHeight }}" src="{{ data.sizeUrl }}" class="cmb-file_list-field-image" alt="{{ data.filename }}">
-                <a href="#" class="cmb2-remove-file-button" rel="{{ data.mediaField }}[{{ data.id }}]">{{ data.stringRemoveImage }}</a>
+                <p><a href="#" class="cmb2-remove-file-button" rel="{{ data.mediaField }}[{{ data.id }}]">{{ data.stringRemoveImage }}</a></p>
                 <input type="hidden" id="filelist-{{ data.id }}" data-id="{{ data.id }}" name="{{ data.mediaFieldName }}[{{ data.id }}]" value="{{ data.url }}">
             </li>
         </script>
