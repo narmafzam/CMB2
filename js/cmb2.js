@@ -651,9 +651,9 @@ window.CMB2 = window.CMB2 || {};
 
 		var $table   = $id( $this.data('selector') );
 		var $oldRow  = $table.find('.cmb-repeatable-grouping').last();
-		var prevNum  = parseInt( $oldRow.data('iterator'), 10 );
-		cmb.idNumber = parseInt( prevNum, 10 ) + 1;
 		var $row     = $($this.data('fields'));
+		var prevNum  = parseInt( $row.data('iterator'), 10 );
+		cmb.idNumber = parseInt( prevNum, 10 ) + 1;
 		var nodeName = $row.prop('nodeName') || 'div';
 		var getRowId = function( id ) {
 			id = id.split('-');
