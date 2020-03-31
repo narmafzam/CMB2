@@ -123,6 +123,7 @@ abstract class CMB2_Type_Multi_Base extends CMB2_Type_Base
 					$items = '';
 					foreach ($group_options as $key => $item) {
 						$items .= $this->generate_option(
+							$value,
 							$method,
 							$args,
 							$item,
@@ -137,6 +138,7 @@ abstract class CMB2_Type_Multi_Base extends CMB2_Type_Base
 			} else {
 
 				$item = $this->generate_option(
+					$value,
 					$method,
 					$args,
 					$opt,
@@ -151,9 +153,19 @@ abstract class CMB2_Type_Multi_Base extends CMB2_Type_Base
 		return $concatenated_items;
 	}
 
-	public function generate_option($method, $args, $option, $value, $index)
+	/**
+	 * @param $value
+	 * @param $method
+	 * @param $args
+	 * @param $option
+	 * @param $opt_value
+	 * @param $index
+	 *
+	 * @return mixed
+	 */
+	public function generate_option($value, $method, $args, $option, $opt_value, $index)
 	{
-		$args['value'] = $value;
+		$args['value'] = $opt_value;
 		if (is_array($option)) {
 
 			foreach ($option as $attr => $attr_value) {
@@ -166,7 +178,7 @@ abstract class CMB2_Type_Multi_Base extends CMB2_Type_Base
 		}
 
 		// Check if this option is the value of the input
-		if ($value === CMB2_Utils::normalize_if_numeric($value)) {
+		if ($value === CMB2_Utils::normalize_if_numeric($opt_value)) {
 			$args['checked'] = 'checked';
 		}
 
