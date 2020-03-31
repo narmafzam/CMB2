@@ -563,7 +563,7 @@ window.CMB2 = window.CMB2 || {};
 		if ( 'SELECT' === tagName && 'undefined' !== typeof defVal ) {
 			var $toSelect = $newInput.find( '[value="'+ defVal + '"]' );
 			if ( $toSelect.length ) {
-				$toSelect.attr( 'selected', 'selected' ).prop( 'selected', 'selected' );
+				$toSelect.prop( 'selected', 'selected' );
 			}
 		}
 
