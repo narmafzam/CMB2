@@ -178,7 +178,8 @@ abstract class CMB2_Type_Multi_Base extends CMB2_Type_Base
 		}
 
 		// Check if this option is the value of the input
-		if ($value === CMB2_Utils::normalize_if_numeric($opt_value)) {
+		if ($value === CMB2_Utils::normalize_if_numeric($opt_value)
+			|| (is_array($value) && in_array($opt_value, $value))) {
 			$args['checked'] = 'checked';
 		}
 
