@@ -720,6 +720,22 @@ window.CMB2 = window.CMB2 || {};
 
 		cmb.triggerElement( $table, 'cmb2_remove_group_row_start', $this );
 
+		var $holder, $groupId, $hiddenInput;
+		$holder = $this.closest('.repeatable');
+		if ($holder.length > 0) {
+
+			$groupId = $holder.data('groupid');
+			$holder = $holder.closest('.postbox');
+			if ($holder.length > 0) {
+
+				var iterator = (number - 1);
+				$hiddenInput = $holder.find('input[data-groupid="' + $groupId + '"]');
+				if ($hiddenInput.length > 0) {
+					$hiddenInput.filter('input[data-iterator="' + iterator + '"]').remove();
+				}
+			}
+		}
+
 		// When a group is removed, loop through all next groups and update fields names.
 		$parent.nextAll( '.cmb-repeatable-grouping' ).find( cmb.repeatEls ).each( cmb.updateNameAttr );
 
