@@ -34,7 +34,12 @@ class CMB2_Type_Select extends CMB2_Type_Multi_Base
 				|| !$a['data-values'])
 			&& isset($this->types->field->value)) {
 			
-			$a['data-values'] = $this->types->field->value;
+			$values = $this->types->field->value;
+			if (is_array($values)) {
+				
+				$values = json_encode($values);
+			}
+			$a['data-values'] = $values;
 		}
 		$attrs = $this->concat_attrs($a, ['desc', 'options']);
 		
