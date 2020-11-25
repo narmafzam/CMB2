@@ -21,8 +21,13 @@ class CMB2_Type_Select extends CMB2_Type_Multi_Base {
 			'options' => $this->concat_items(),
 		) );
 
-		$attrs = $this->concat_attrs( $a, array( 'desc', 'options' ) );
+		if (isset($a['multiple'])
+			&& $a['multiple']) {
 
+			$a['name'] = $a['name'] . '[]';
+		}
+		
+		$attrs = $this->concat_attrs( $a, array( 'desc', 'options' ) );
 		return $this->rendered(
 			sprintf( '<select%s>%s</select>%s', $attrs, $a['options'], $a['desc'] )
 		);
