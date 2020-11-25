@@ -30,6 +30,12 @@ class CMB2_Type_Select extends CMB2_Type_Multi_Base
 			$a['name'] = $a['name'] . '[]';
 		}
 		
+		if ((!isset($a['data-value'])
+				|| !$a['data-value'])
+			&& isset($this->types->field->value)) {
+			
+			$a['data-value'] = $this->types->field->value;
+		}
 		$attrs = $this->concat_attrs($a, ['desc', 'options']);
 		
 		return $this->rendered(
