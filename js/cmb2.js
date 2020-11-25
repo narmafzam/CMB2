@@ -644,19 +644,12 @@ window.CMB2 = window.CMB2 || {};
 	cmb.addGroupRow = function( evt ) {
 		evt.preventDefault();
 
-		var $this = $( this ),
-			$limit = $this.data('limit');
+		var $this = $( this );
 
 		// before anything significant happens
 		cmb.triggerElement( $this, 'cmb2_add_group_row_start', $this );
 
 		var $table   = $id( $this.data('selector') );
-		var $rows    = $table.children()
-			.filter('.cmb-repeatable-grouping').length;
-
-		if ($limit > 0 && $rows >= $limit) {
-			return;
-		}
 		var $oldRow  = $table.find('.cmb-repeatable-grouping').last();
 		var $newRow  = $($this.data('fields'));
 		var prevNum  = parseInt( $newRow.data('iterator'),10 );

@@ -536,13 +536,9 @@ class CMB2 extends CMB2_Base
 			$fields = $this->render_group_row( $field_group );
 		}
 
-        if ($field_group->args('repeatable')) {
-            echo '<div class="cmb-row"><div class="cmb-td"><p class="cmb-add-row"><button type="button" data-fields="',
-            htmlspecialchars($fields) ,'" data-selector="', esc_attr( $field_group->id() ),
-            '_repeat" data-grouptitle="', esc_attr( $field_group->options( 'group_title' ) ),
-            '" data-limit="', esc_attr( $field_group->options( 'limit' ) ), '" class="cmb-add-group-row button-secondary">',
-            $field_group->options( 'add_button' ), '</button></p></div></div>';
-        }
+		if ($field_group->args('repeatable')) {
+			echo '<div class="cmb-row"><div class="cmb-td"><p class="cmb-add-row"><button type="button" data-fields="', htmlspecialchars($fields) ,'" data-selector="', esc_attr( $field_group->id() ), '_repeat" data-grouptitle="', esc_attr( $field_group->options( 'group_title' ) ), '" class="cmb-add-group-row button-secondary">', $field_group->options( 'add_button' ), '</button></p></div></div>';
+		}
 
 		echo '</div></div></div>';
 
