@@ -640,7 +640,7 @@ class CMB2 extends CMB2_Base
 		$attributes = urldecode_deep(str_replace("=", '="', http_build_query($attributes, null, '" ', PHP_QUERY_RFC3986)) . '"');
 		
 		echo "<div {$attributes}>";
-		
+		do_action('cmb2_before_group_row_fields', $field_group);
 		if ($field_group->args('repeatable')) {
 			echo '<button type="button" data-selector="', $field_group->id(), '_repeat" data-confirm="', esc_attr($confirm_deletion), '" class="dashicons-before dashicons-no-alt cmb-remove-group-row" title="', esc_attr($field_group->options('remove_button')), '"></button>';
 		}
@@ -675,10 +675,9 @@ class CMB2 extends CMB2_Base
 					</div>
 					';
 		}
-		echo '
-			</div>
-		</div>
-		';
+		echo '</div>';
+		do_action('cmb2_after_group_row_fields', $field_group);
+		echo '</div>';
 		
 		$field_group->peform_param_callback('after_group_row');
 		$output = ob_get_clean();
