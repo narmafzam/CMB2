@@ -561,6 +561,7 @@ class CMB2 extends CMB2_Base
 		} else {
 			$fields = $this->render_group_row($field_group);
 		}
+		
 		do_action('cmb2_after_group_rows', $fields, $field_group, $field_args);
 		$fields = apply_filters('cmb2_group_fields', $fields, $field_group, $field_args);
 		if ($field_group->args('repeatable')) {
